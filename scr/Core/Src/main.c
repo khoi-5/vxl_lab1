@@ -61,8 +61,15 @@ static void MX_GPIO_Init(void);
   * @brief  The application entry point.
   * @retval int
   */
+void set_led(GPIO_PinState redstate, GPIO_PinState yellowstate, GPIO_PinState greenstate){
+	HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, redstate);
+	HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, yellowstate);
+	HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, greenstate);
+
+}
 int main(void)
 {
+	//EX2
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
@@ -91,17 +98,25 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  int count = 4;
+  int count = 10;
   while (1)
   {
-	  if (count % 4 == 0) {
-		  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, SET);
-		  HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, RESET);
-	  } else if (count % 4 == 2) {
-		  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, RESET);
-		  HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, SET);
+	  switch (count){
+	  case 10:
+		  set_led(0, 1, 1);
+		  break;
+	  case 7:
+		  set_led(1, 0, 1);
+		  break;
+	  case 5:
+		  set_led(1, 1, 0);
+		  break;
+	  case 1:
+		  count = 11;
+	  default:
+		  break;
 	  }
-	      count = (count + 1) % 4;
+	      count--;
 	      HAL_Delay(1000);
     /* USER CODE END WHILE */
 
@@ -158,10 +173,10 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LED_RED_Pin|LED_YELLOW_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LED_RED_Pin|LED_YELLOW_Pin|LED_GREEN_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : LED_RED_Pin LED_YELLOW_Pin */
-  GPIO_InitStruct.Pin = LED_RED_Pin|LED_YELLOW_Pin;
+  /*Configure GPIO pins : LED_RED_Pin LED_YELLOW_Pin LED_GREEN_Pin */
+  GPIO_InitStruct.Pin = LED_RED_Pin|LED_YELLOW_Pin|LED_GREEN_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
