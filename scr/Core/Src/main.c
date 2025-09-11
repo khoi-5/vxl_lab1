@@ -67,6 +67,9 @@ void set_led(GPIO_PinState redstate, GPIO_PinState yellowstate, GPIO_PinState gr
 	HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, greenstate);
 
 }
+#define RED  5
+#define YELLOW  2
+#define GREEN  3
 int main(void)
 {
 	//EX2
@@ -98,21 +101,21 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  int count = 10;
+  int count = RED + YELLOW + GREEN ;
   while (1)
   {
 	  switch (count){
-	  case 10:
+	  case (RED + YELLOW + GREEN):
 		  set_led(0, 1, 1);
 		  break;
-	  case 7:
+	  case (YELLOW + GREEN):
 		  set_led(1, 0, 1);
 		  break;
-	  case 5:
+	  case (GREEN):
 		  set_led(1, 1, 0);
 		  break;
 	  case 1:
-		  count = 11;
+		  count = RED + YELLOW + GREEN + 1;
 	  default:
 		  break;
 	  }

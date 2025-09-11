@@ -35,15 +35,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  15 .debug_ranges 00000350  00000000  00000000  00024298  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00015560  00000000  00000000  000245e8  2**0
+ 16 .debug_macro  00015572  00000000  00000000  000245e8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00004607  00000000  00000000  00039b48  2**0
+ 17 .debug_line   00004607  00000000  00000000  00039b5a  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00079894  00000000  00000000  0003e14f  2**0
+ 18 .debug_str    000798ab  00000000  00000000  0003e161  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000053  00000000  00000000  000b79e3  2**0
+ 19 .comment      00000053  00000000  00000000  000b7a0c  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00000d54  00000000  00000000  000b7a38  2**2
+ 20 .debug_frame  00000d54  00000000  00000000  000b7a60  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -120,6 +120,9 @@ void set_led(GPIO_PinState redstate, GPIO_PinState yellowstate, GPIO_PinState gr
  800018c:	40010800 	.word	0x40010800
 
 08000190 <main>:
+#define RED  5
+#define YELLOW  2
+#define GREEN  3
 int main(void)
 {
  8000190:	b580      	push	{r7, lr}
@@ -151,7 +154,7 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  int count = 10;
+  int count = RED + YELLOW + GREEN ;
  80001a2:	230a      	movs	r3, #10
  80001a4:	607b      	str	r3, [r7, #4]
  80001a6:	687b      	ldr	r3, [r7, #4]
@@ -162,18 +165,18 @@ int main(void)
  80001b0:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
  80001b4:	08000201 	.word	0x08000201
  80001b8:	08000205 	.word	0x08000205
- 80001bc:	08000205 	.word	0x08000205
+ 80001bc:	080001f5 	.word	0x080001f5
  80001c0:	08000205 	.word	0x08000205
- 80001c4:	080001f5 	.word	0x080001f5
+ 80001c4:	080001e9 	.word	0x080001e9
  80001c8:	08000205 	.word	0x08000205
- 80001cc:	080001e9 	.word	0x080001e9
+ 80001cc:	08000205 	.word	0x08000205
  80001d0:	08000205 	.word	0x08000205
  80001d4:	08000205 	.word	0x08000205
  80001d8:	080001dd 	.word	0x080001dd
   while (1)
   {
 	  switch (count){
-	  case 10:
+	  case (RED + YELLOW + GREEN):
 		  set_led(0, 1, 1);
  80001dc:	2201      	movs	r2, #1
  80001de:	2101      	movs	r1, #1
@@ -181,7 +184,7 @@ int main(void)
  80001e2:	f7ff ffb3 	bl	800014c <set_led>
 		  break;
  80001e6:	e00e      	b.n	8000206 <main+0x76>
-	  case 7:
+	  case (YELLOW + GREEN):
 		  set_led(1, 0, 1);
  80001e8:	2201      	movs	r2, #1
  80001ea:	2100      	movs	r1, #0
@@ -189,7 +192,7 @@ int main(void)
  80001ee:	f7ff ffad 	bl	800014c <set_led>
 		  break;
  80001f2:	e008      	b.n	8000206 <main+0x76>
-	  case 5:
+	  case (GREEN):
 		  set_led(1, 1, 0);
  80001f4:	2200      	movs	r2, #0
  80001f6:	2101      	movs	r1, #1
@@ -198,7 +201,7 @@ int main(void)
 		  break;
  80001fe:	e002      	b.n	8000206 <main+0x76>
 	  case 1:
-		  count = 11;
+		  count = RED + YELLOW + GREEN + 1;
  8000200:	230b      	movs	r3, #11
  8000202:	607b      	str	r3, [r7, #4]
 	  default:
