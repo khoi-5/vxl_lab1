@@ -104,7 +104,7 @@ void set_led (const GPIO_PinState *state){
 }
 
 //code led 7 doan
-GPIO_TypeDef *SEG_PORT [12] = {
+GPIO_TypeDef *SEG_PORT [14] = {
 		SEG0_GPIO_Port,
 		SEG1_GPIO_Port,
 		SEG2_GPIO_Port,
@@ -116,10 +116,12 @@ GPIO_TypeDef *SEG_PORT [12] = {
 		SEG8_GPIO_Port,
 		SEG9_GPIO_Port,
 		SEG10_GPIO_Port,
-		SEG11_GPIO_Port
+		SEG11_GPIO_Port,
+		SEG12_GPIO_Port,
+		SEG13_GPIO_Port
 };
 
-uint16_t SEG_Pin[12] ={
+uint16_t SEG_Pin[14] ={
 		SEG0_Pin,
 		SEG1_Pin,
 		SEG2_Pin,
@@ -131,7 +133,9 @@ uint16_t SEG_Pin[12] ={
 		SEG8_Pin,
 		SEG9_Pin,
 		SEG10_Pin,
-		SEG11_Pin
+		SEG11_Pin,
+		SEG12_Pin,
+		SEG13_Pin
 };
 
 
@@ -148,16 +152,31 @@ GPIO_PinState SEG_state[10][7] = {
     {0, 0, 0, 0, 0, 0, 0}, // 8
     {0, 0, 0, 0, 1, 0, 0}  // 9
 };
-void set_led_7 (const GPIO_PinState *state){
+void set_led_7_x (const GPIO_PinState *state){
 	for (int i =0; i< 7; i++){
 		HAL_GPIO_WritePin(SEG_PORT[i], SEG_Pin[i], state[i]);
 	}
 }
-void display7seg(int num) {
+void display7seg_x(int num) {
     if (num >= 0 && num <= 9) {
-        set_led_7(SEG_state[num]);
+        set_led_7_x(SEG_state[num]);
     }
 }
+
+
+void set_led_7_y (const GPIO_PinState *state){
+	for (int i =7; i< 14; i++){
+		HAL_GPIO_WritePin(SEG_PORT[i], SEG_Pin[i], state[i-7]);
+	}
+}
+void display7seg_y(int num) {
+    if (num >= 0 && num <= 9) {
+        set_led_7_y(SEG_state[num]);
+    }
+}
+
+
+
 
 int main(void)
 {
