@@ -61,7 +61,8 @@ static void MX_GPIO_Init(void);
   * @brief  The application entry point.
   * @retval int
   */
-// code led thuong
+
+
 GPIO_TypeDef *LED_PORT [12] = {
 		LED0_GPIO_Port,
 		LED1_GPIO_Port,
@@ -165,8 +166,8 @@ void display7seg_x(int num) {
 
 
 void set_led_7_y (const GPIO_PinState *state){
-	for (int i =7; i< 14; i++){
-		HAL_GPIO_WritePin(SEG_PORT[i], SEG_Pin[i], state[i-7]);
+	for (int i =0; i< 7; i++){
+		HAL_GPIO_WritePin(SEG_PORT[i+7], SEG_Pin[i+7], state[i]);
 	}
 }
 void display7seg_y(int num) {
@@ -174,9 +175,6 @@ void display7seg_y(int num) {
         set_led_7_y(SEG_state[num]);
     }
 }
-
-
-
 
 int main(void)
 {
@@ -208,13 +206,63 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  int count = 0;
+  int count = 10;
+
   while (1)
   {
-	  if (count >= 10) count = 0;
-	  display7seg(count);
-	      count ++;
-	      HAL_Delay(1000);
+	  //if(count >= 10) count =0;
+	  //display7seg_x(count);
+	  //display7seg_y(count);
+	  switch (count){
+	 	  case 10:
+	 		  set_led(LED_state[0]);
+	 		  display7seg_x(5);
+	 		  display7seg_y(3);
+	 		  break;
+	 	  case 9:
+	 		  display7seg_x(4);
+	 		  display7seg_y(2);
+	 		  break;
+	 	  case 8:
+	 		  display7seg_x(3);
+	 		  display7seg_y(1);
+	 		  break;
+	 	  case 7:
+	 		  set_led(LED_state[1]);
+	 		  display7seg_x(2);
+	 		  display7seg_y(2);
+	 		  break;
+	 	  case 6:
+	 		  display7seg_x(1);
+	 		  display7seg_y(1);
+	 		  break;
+	 	  case 5:
+	 		  set_led(LED_state[2]);
+	 		  display7seg_x(3);
+	 		  display7seg_y(5);
+	 		  break;
+	 	  case 4:
+	 		  display7seg_x(2);
+	 		  display7seg_y(4);
+	 		  break;
+	 	  case 3:
+	 		  display7seg_x(1);
+	 		  display7seg_y(3);
+	 		  break;
+	 	  case 2:
+	 		  set_led(LED_state[1]);
+	 		  display7seg_x(2);
+	 		  display7seg_y(2);
+	 		  break;
+	 	  case 1:
+	 		  display7seg_x(1);
+	 		  display7seg_y(1);
+	 		  count = 11;
+	 		  break;
+	 	  }
+	 	      count --;
+	 	      HAL_Delay(1000);
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -277,8 +325,9 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, SEG0_Pin|SEG1_Pin|SEG2_Pin|SEG10_Pin
-                          |SEG11_Pin|SEG3_Pin|SEG4_Pin|SEG5_Pin
-                          |SEG6_Pin|SEG7_Pin|SEG8_Pin|SEG9_Pin, GPIO_PIN_RESET);
+                          |SEG11_Pin|SEG12_Pin|SEG13_Pin|SEG3_Pin
+                          |SEG4_Pin|SEG5_Pin|SEG6_Pin|SEG7_Pin
+                          |SEG8_Pin|SEG9_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : LED0_Pin LED1_Pin LED2_Pin LED3_Pin
                            LED4_Pin LED5_Pin LED6_Pin LED7_Pin
@@ -292,11 +341,13 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : SEG0_Pin SEG1_Pin SEG2_Pin SEG10_Pin
-                           SEG11_Pin SEG3_Pin SEG4_Pin SEG5_Pin
-                           SEG6_Pin SEG7_Pin SEG8_Pin SEG9_Pin */
+                           SEG11_Pin SEG12_Pin SEG13_Pin SEG3_Pin
+                           SEG4_Pin SEG5_Pin SEG6_Pin SEG7_Pin
+                           SEG8_Pin SEG9_Pin */
   GPIO_InitStruct.Pin = SEG0_Pin|SEG1_Pin|SEG2_Pin|SEG10_Pin
-                          |SEG11_Pin|SEG3_Pin|SEG4_Pin|SEG5_Pin
-                          |SEG6_Pin|SEG7_Pin|SEG8_Pin|SEG9_Pin;
+                          |SEG11_Pin|SEG12_Pin|SEG13_Pin|SEG3_Pin
+                          |SEG4_Pin|SEG5_Pin|SEG6_Pin|SEG7_Pin
+                          |SEG8_Pin|SEG9_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
