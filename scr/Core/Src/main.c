@@ -100,6 +100,12 @@ void turnAllClock (){
 	  HAL_GPIO_WritePin(LED_PORT[i], LED_Pin[i], 1);
   }
  }
+void setNumberOnClock(int num){
+	HAL_GPIO_WritePin(LED_PORT[num], LED_Pin[num], 1);
+}
+void setzeroOnClock(int num){
+	HAL_GPIO_WritePin(LED_PORT[num], LED_Pin[num], 0);
+}
 int main(void)
 {
   /* USER CODE BEGIN 1 */
@@ -136,8 +142,9 @@ int main(void)
   {
 	  if (count > 11) count =0;
 
-	  if (count % 2 == 0) turnAllClock();
-	  else clearAllClock();
+	  setNumberOnClock(count);
+	  if (count == 0) setzeroOnClock(11);
+	  else setzeroOnClock(count-1);
 
 	  count ++;
 	  HAL_Delay(1000);
