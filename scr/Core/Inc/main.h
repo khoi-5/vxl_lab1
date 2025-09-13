@@ -58,58 +58,30 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define LED0_Pin GPIO_PIN_0
+#define LED0_Pin GPIO_PIN_4
 #define LED0_GPIO_Port GPIOA
-#define LED1_Pin GPIO_PIN_1
+#define LED1_Pin GPIO_PIN_5
 #define LED1_GPIO_Port GPIOA
-#define LED2_Pin GPIO_PIN_2
+#define LED2_Pin GPIO_PIN_6
 #define LED2_GPIO_Port GPIOA
-#define LED3_Pin GPIO_PIN_3
+#define LED3_Pin GPIO_PIN_7
 #define LED3_GPIO_Port GPIOA
-#define LED4_Pin GPIO_PIN_4
+#define LED4_Pin GPIO_PIN_8
 #define LED4_GPIO_Port GPIOA
-#define LED5_Pin GPIO_PIN_5
+#define LED5_Pin GPIO_PIN_9
 #define LED5_GPIO_Port GPIOA
-#define LED6_Pin GPIO_PIN_6
+#define LED6_Pin GPIO_PIN_10
 #define LED6_GPIO_Port GPIOA
-#define LED7_Pin GPIO_PIN_7
+#define LED7_Pin GPIO_PIN_11
 #define LED7_GPIO_Port GPIOA
-#define SEG0_Pin GPIO_PIN_0
-#define SEG0_GPIO_Port GPIOB
-#define SEG1_Pin GPIO_PIN_1
-#define SEG1_GPIO_Port GPIOB
-#define SEG2_Pin GPIO_PIN_2
-#define SEG2_GPIO_Port GPIOB
-#define SEG10_Pin GPIO_PIN_10
-#define SEG10_GPIO_Port GPIOB
-#define SEG11_Pin GPIO_PIN_11
-#define SEG11_GPIO_Port GPIOB
-#define SEG12_Pin GPIO_PIN_12
-#define SEG12_GPIO_Port GPIOB
-#define SEG13_Pin GPIO_PIN_13
-#define SEG13_GPIO_Port GPIOB
-#define LED8_Pin GPIO_PIN_8
+#define LED8_Pin GPIO_PIN_12
 #define LED8_GPIO_Port GPIOA
-#define LED9_Pin GPIO_PIN_9
+#define LED9_Pin GPIO_PIN_13
 #define LED9_GPIO_Port GPIOA
-#define LED10_Pin GPIO_PIN_10
+#define LED10_Pin GPIO_PIN_14
 #define LED10_GPIO_Port GPIOA
-#define LED11_Pin GPIO_PIN_11
+#define LED11_Pin GPIO_PIN_15
 #define LED11_GPIO_Port GPIOA
-#define SEG3_Pin GPIO_PIN_3
-#define SEG3_GPIO_Port GPIOB
-#define SEG4_Pin GPIO_PIN_4
-#define SEG4_GPIO_Port GPIOB
-#define SEG5_Pin GPIO_PIN_5
-#define SEG5_GPIO_Port GPIOB
-#define SEG6_Pin GPIO_PIN_6
-#define SEG6_GPIO_Port GPIOB
-#define SEG7_Pin GPIO_PIN_7
-#define SEG7_GPIO_Port GPIOB
-#define SEG8_Pin GPIO_PIN_8
-#define SEG8_GPIO_Port GPIOB
-#define SEG9_Pin GPIO_PIN_9
-#define SEG9_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
