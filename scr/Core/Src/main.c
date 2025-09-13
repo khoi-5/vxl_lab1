@@ -90,6 +90,16 @@ uint16_t LED_Pin[12] ={
 		LED10_Pin,
 		LED11_Pin
 };
+void clearAllClock (){
+  for (int i=0; i< 12; i++){
+	  HAL_GPIO_WritePin(LED_PORT[i], LED_Pin[i], 0);
+  }
+ }
+void turnAllClock (){
+  for (int i=0; i< 12; i++){
+	  HAL_GPIO_WritePin(LED_PORT[i], LED_Pin[i], 1);
+  }
+ }
 int main(void)
 {
   /* USER CODE BEGIN 1 */
@@ -126,9 +136,8 @@ int main(void)
   {
 	  if (count > 11) count =0;
 
-	  HAL_GPIO_WritePin(LED_PORT[count], LED_Pin[count], 1);
-	  if (count ==0) HAL_GPIO_WritePin(LED_PORT[11], LED_Pin[11], 0);
-	  else HAL_GPIO_WritePin(LED_PORT[count-1], LED_Pin[count-1], 0);
+	  if (count % 2 == 0) turnAllClock();
+	  else clearAllClock();
 
 	  count ++;
 	  HAL_Delay(1000);
