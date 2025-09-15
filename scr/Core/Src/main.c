@@ -103,7 +103,7 @@ void turnAllClock (){
 void setNumberOnClock(int num){
 	HAL_GPIO_WritePin(LED_PORT[num], LED_Pin[num], 1);
 }
-void setzeroOnClock(int num){
+void clearNumberOnClock(int num){
 	HAL_GPIO_WritePin(LED_PORT[num], LED_Pin[num], 0);
 }
 int main(void)
@@ -143,11 +143,11 @@ int main(void)
 	  if (count > 11) count =0;
 
 	  setNumberOnClock(count);
-	  if (count == 0) setzeroOnClock(11);
-	  else setzeroOnClock(count-1);
+
 
 	  count ++;
 	  HAL_Delay(1000);
+	  clearAllClock();
 
     /* USER CODE END WHILE */
 
