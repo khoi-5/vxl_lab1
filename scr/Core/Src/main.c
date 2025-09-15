@@ -136,23 +136,33 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  int count =0;
-
-  int minute= 0;
-  //int second = 0;
+  int hour = 0;
+  int minute = 0;
+  int second = 0;
 
   while (1)
   {
-	  //second = count / 5;
-	  minute = count / 60;
-
-	  //setNumberOnClock(second % 12);
-	  setNumberOnClock(minute % 12);
+	  setNumberOnClock(hour);
+	  setNumberOnClock(minute/5);
+	  setNumberOnClock(second/5);
 
 
 
-	  count ++;
-	  HAL_Delay(1000);
+
+	  HAL_Delay(100);
+	  second++;
+	  if (second == 60){
+		  second =0;
+		  minute++;
+	  }
+	  if (minute == 60){
+		  minute =0;
+		  hour++;
+	  }
+	  if (hour == 12){
+		  hour =0;
+
+	  }
 	  clearAllClock();
 
     /* USER CODE END WHILE */
