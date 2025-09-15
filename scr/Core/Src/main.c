@@ -139,14 +139,14 @@ int main(void)
   int count =0;
 
   int minute= 0;
-  int second = 0;
+  //int second = 0;
 
   while (1)
   {
-	  second = count / 5;
+	  //second = count / 5;
 	  minute = count / 60;
 
-	  setNumberOnClock(second % 12);
+	  //setNumberOnClock(second % 12);
 	  setNumberOnClock(minute % 12);
 
 
