@@ -136,13 +136,19 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  int count = 0;
+  int count =0;
+
+  int minute= 0;
+  int second = 0;
 
   while (1)
   {
-	  if (count > 11) count =0;
+	  second = count / 5;
+	  minute = count / 60;
 
-	  setNumberOnClock(count);
+	  setNumberOnClock(second % 12);
+	  setNumberOnClock(minute % 12);
+
 
 
 	  count ++;
