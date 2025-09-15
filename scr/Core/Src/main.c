@@ -143,11 +143,11 @@ int main(void)
 	  if (count > 11) count =0;
 
 	  setNumberOnClock(count);
-	  if (count == 0) setzeroOnClock(11);
-	  else setzeroOnClock(count-1);
+
 
 	  count ++;
 	  HAL_Delay(1000);
+	  clearAllClock();
 
     /* USER CODE END WHILE */
 
