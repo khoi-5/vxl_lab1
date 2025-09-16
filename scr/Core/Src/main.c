@@ -100,9 +100,7 @@ void set_led (const GPIO_PinState *state){
 		HAL_GPIO_WritePin(LED_PORT[i], LED_Pin[i], state[i]);
 	}
 }
-#define RED 5
-#define YELLOW 2
-#define GREEN 3
+
 int main(void)
 {
   /* USER CODE BEGIN 1 */
