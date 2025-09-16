@@ -19,6 +19,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include <stdlib.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -176,6 +177,92 @@ void display7seg_y(int num) {
     }
 }
 
+
+
+// ====================QUEUE===========================
+enum color{red, yellow, green};
+
+typedef struct NODE {
+    int type;
+    int max_time;
+    int remaining_time;
+} NODE;
+
+
+typedef struct queue_node {
+    NODE data;
+    struct queue_node *next;
+} queue_node;
+
+typedef struct queue {
+    queue_node *front, *rear;
+    int size;
+} queue;
+
+
+
+void initQueue(queue *q) {
+    q->front = q->rear = NULL;
+    q->size = 0;
+}
+
+
+int isEmpty(queue *q) {
+    return (q->size == 0);
+}
+
+
+void enqueue(queue *q, NODE value) {
+    queue_node *temp = (queue_node*)malloc(sizeof(queue_node));
+    if (!temp) {
+        return;
+    }
+    temp->data = value;
+    temp->next = NULL;
+
+    if (q->rear == NULL) {
+        q->front = q->rear = temp;
+    } else {
+        q->rear->next = temp;
+        q->rear = temp;
+    }
+    q->size++;
+}
+
+
+int dequeue(queue *q, NODE *out) {
+    if (isEmpty(q)) {
+        return 0;
+    }
+
+    queue_node *temp = q->front;
+    *out = temp->data;
+
+    q->front = q->front->next;
+    if (q->front == NULL)
+        q->rear = NULL;
+
+    free(temp);
+    q->size--;
+    return 1;
+}
+
+
+NODE peek(queue *q) {
+    NODE err = {-1, -1, -1};
+    if (isEmpty(q)) return err;
+    return q->front->data;
+}
+
+
+//================================
+#define RED_X 5
+#define YELLOW_X 2
+#define GREEN_X 3
+
+#define RED_Y 5
+#define YELLOW_Y 2
+#define GREEN_Y 3
 int main(void)
 {
   /* USER CODE BEGIN 1 */
@@ -206,62 +293,66 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  int count = 10;
+	queue q1, q2;
+	initQueue(&q1);
+	initQueue(&q2);
+
+	NODE a1 = { red, RED_X, RED_X };
+	NODE b1 = { yellow, YELLOW_X, YELLOW_X };
+	NODE c1 = { green, GREEN_X, GREEN_X };
+	enqueue(&q1, a1);
+	enqueue(&q1, c1);
+	enqueue(&q1, b1);
+
+
+	NODE a2 = { red, RED_Y, RED_Y };
+	NODE b2 = { yellow, YELLOW_Y, YELLOW_Y };
+	NODE c2 = { green, GREEN_Y, GREEN_Y };
+	enqueue(&q2, c2);
+	enqueue(&q2, b2);
+	enqueue(&q2, a2);
+
 
   while (1)
   {
-	  //if(count >= 10) count =0;
-	  //display7seg_x(count);
-	  //display7seg_y(count);
-	  switch (count){
-	 	  case 10:
-	 		  set_led(LED_state[0]);
-	 		  display7seg_x(5);
-	 		  display7seg_y(3);
-	 		  break;
-	 	  case 9:
-	 		  display7seg_x(4);
-	 		  display7seg_y(2);
-	 		  break;
-	 	  case 8:
-	 		  display7seg_x(3);
-	 		  display7seg_y(1);
-	 		  break;
-	 	  case 7:
-	 		  set_led(LED_state[1]);
-	 		  display7seg_x(2);
-	 		  display7seg_y(2);
-	 		  break;
-	 	  case 6:
-	 		  display7seg_x(1);
-	 		  display7seg_y(1);
-	 		  break;
-	 	  case 5:
-	 		  set_led(LED_state[2]);
-	 		  display7seg_x(3);
-	 		  display7seg_y(5);
-	 		  break;
-	 	  case 4:
-	 		  display7seg_x(2);
-	 		  display7seg_y(4);
-	 		  break;
-	 	  case 3:
-	 		  display7seg_x(1);
-	 		  display7seg_y(3);
-	 		  break;
-	 	  case 2:
-	 		  set_led(LED_state[1]);
-	 		  display7seg_x(2);
-	 		  display7seg_y(2);
-	 		  break;
-	 	  case 1:
-	 		  display7seg_x(1);
-	 		  display7seg_y(1);
-	 		  count = 11;
-	 		  break;
-	 	  }
-	 	      count --;
-	 	      HAL_Delay(1000);
+	  queue_node *h1 = q1.front;
+	  queue_node *h2 = q2.front;
+
+
+	  if (h1->data.remaining_time <= 0) {
+		NODE done;
+		dequeue(&q1, &done);
+		done.remaining_time = done.max_time;
+		enqueue(&q1, done);
+		h1 = q1.front;
+	  }
+
+	  if (h2->data.remaining_time <= 0) {
+		NODE done;
+		dequeue(&q2, &done);
+		done.remaining_time = done.max_time;
+		enqueue(&q2, done);
+		h2 = q2.front;
+	  }
+
+
+	  if (h1->data.type == green  && h2->data.type == red)    set_led(LED_state[0]);
+	  else if (h1->data.type == yellow && h2->data.type == red)   set_led(LED_state[1]);
+	  else if (h1->data.type == red   && h2->data.type == green)  set_led(LED_state[2]);
+	  else if (h1->data.type == red   && h2->data.type == yellow) set_led(LED_state[3]);
+
+
+
+	  if (h1->data.remaining_time > 0) {
+		  display7seg_y(h1->data.remaining_time);
+		  h1->data.remaining_time--;
+	  }
+	  if (h2->data.remaining_time > 0) {
+		  display7seg_x(h2->data.remaining_time);
+		  h2->data.remaining_time--;
+	  }
+
+	  HAL_Delay(1000);
 
     /* USER CODE END WHILE */
 
