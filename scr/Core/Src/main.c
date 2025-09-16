@@ -229,15 +229,16 @@ int main(void)
   NODE b1 = { yellow, YELLOW_X, YELLOW_X };
   NODE c1 = { green, GREEN_X, GREEN_X };
   enqueue(&q1, a1);
-  enqueue(&q1, b1);
   enqueue(&q1, c1);
+  enqueue(&q1, b1);
+
 
   NODE a2 = { red, RED_Y, RED_Y };
   NODE b2 = { yellow, YELLOW_Y, YELLOW_Y };
   NODE c2 = { green, GREEN_Y, GREEN_Y };
-  enqueue(&q2, a2);
-  enqueue(&q2, b2);
   enqueue(&q2, c2);
+  enqueue(&q2, b2);
+  enqueue(&q2, a2);
 
 
   while (1)
@@ -269,7 +270,7 @@ int main(void)
 	  if (h1->data.type == green  && h2->data.type == red)    set_led(LED_state[0]);
 	  else if (h1->data.type == yellow && h2->data.type == red)   set_led(LED_state[1]);
 	  else if (h1->data.type == red   && h2->data.type == green)  set_led(LED_state[2]);
-	  else if (h1->data.type == red   && h2->data.type == yellow) set_led(LED_state[0]);
+	  else if (h1->data.type == red   && h2->data.type == yellow) set_led(LED_state[3]);
 
 
 	  if (h1->data.remaining_time > 0) h1->data.remaining_time--;
