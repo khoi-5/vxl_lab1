@@ -101,6 +101,95 @@ void set_led (const GPIO_PinState *state){
 	}
 }
 
+
+
+
+// ====================QUEUE===========================
+enum color{red, yellow, green};
+
+typedef struct NODE {
+    int type;
+    int max_time;
+    int remaining_time;
+} NODE;
+
+
+typedef struct queue_node {
+    NODE data;
+    struct queue_node *next;
+} queue_node;
+
+typedef struct queue {
+    queue_node *front, *rear;
+    int size;
+} queue;
+
+
+
+void initQueue(queue *q) {
+    q->front = q->rear = NULL;
+    q->size = 0;
+}
+
+
+int isEmpty(queue *q) {
+    return (q->size == 0);
+}
+
+
+void enqueue(queue *q, NODE value) {
+    queue_node *temp = (queue_node*)malloc(sizeof(queue_node));
+    if (!temp) {
+        return;
+    }
+    temp->data = value;
+    temp->next = NULL;
+
+    if (q->rear == NULL) {
+        q->front = q->rear = temp;
+    } else {
+        q->rear->next = temp;
+        q->rear = temp;
+    }
+    q->size++;
+}
+
+
+NODE dequeue(queue *q) {
+    NODE err = {-1, -1, -1};
+    if (isEmpty(q)) {;
+        return err;
+    }
+
+    queue_node *temp = q->front;
+    NODE value = temp->data;
+
+    q->front = q->front->next;
+    if (q->front == NULL)
+        q->rear = NULL;
+
+    free(temp);
+    q->size--;
+    return value;
+}
+
+
+NODE peek(queue *q) {
+    NODE err = {-1, -1, -1};
+    if (isEmpty(q)) return err;
+    return q->front->data;
+}
+
+
+//================================
+#define RED_X 5
+#define YELLOW_X 2
+#define GREEN_X 3
+
+#define RED_Y 5
+#define YELLOW_Y 2
+#define GREEN_Y 3
+
 int main(void)
 {
   /* USER CODE BEGIN 1 */
