@@ -19,7 +19,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
+#include <stdlib.h>
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -155,14 +155,13 @@ void enqueue(queue *q, NODE value) {
 }
 
 
-NODE dequeue(queue *q) {
-    NODE err = {-1, -1, -1};
-    if (isEmpty(q)) {;
-        return err;
+int dequeue(queue *q, NODE *out) {
+    if (isEmpty(q)) {
+        return 0;
     }
 
     queue_node *temp = q->front;
-    NODE value = temp->data;
+    *out = temp->data;
 
     q->front = q->front->next;
     if (q->front == NULL)
@@ -170,7 +169,7 @@ NODE dequeue(queue *q) {
 
     free(temp);
     q->size--;
-    return value;
+    return 1;
 }
 
 
@@ -220,31 +219,61 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  int count = 10;
+
+
+  queue q1, q2;
+
+  NODE a1 = { red, RED_X, RED_X };
+  NODE b1 = { yellow, YELLOW_X, YELLOW_X };
+  NODE c1 = { green, GREEN_X, GREEN_X };
+  enqueue(&q1, a1);
+  enqueue(&q1, b1);
+  enqueue(&q1, c1);
+
+  NODE a2 = { red, RED_Y, RED_Y };
+  NODE b2 = { yellow, YELLOW_Y, YELLOW_Y };
+  NODE c2 = { green, GREEN_Y, GREEN_Y };
+  enqueue(&q2, a2);
+  enqueue(&q2, b2);
+  enqueue(&q2, c2);
+
+
   while (1)
   {
-	  switch (count){
-	  case 10:
-		  set_led(LED_state[0]);
-		  break;
-	  case 7:
-		  set_led(LED_state[1]);
-		  break;
-	  case 5:
-		  set_led(LED_state[2]);
-		  break;
-	  case 2:
-		  set_led(LED_state[3]);
-		  break;
-	  case 1:
-		  count =11;
-		  break;
-	  default:
-		  break;
 
+	  queue_node *h1 = q1.front;
+	  queue_node *h2 = q2.front;
+
+
+
+
+	  if (h1->data.remaining_time <= 0) {
+		NODE done;
+		dequeue(&q1, &done);
+		done.remaining_time = done.max_time;
+		enqueue(&q1, done);
+		h1 = q1.front;
 	  }
-	      count --;
-	      HAL_Delay(1000);
+
+	  if (h2->data.remaining_time <= 0) {
+		NODE done;
+		dequeue(&q2, &done);
+		done.remaining_time = done.max_time;
+		enqueue(&q2, done);
+		h2 = q2.front;
+	  }
+
+
+	  if (h1->data.type == green  && h2->data.type == red)    set_led(LED_state[0]);
+	  else if (h1->data.type == yellow && h2->data.type == red)   set_led(LED_state[1]);
+	  else if (h1->data.type == red   && h2->data.type == green)  set_led(LED_state[2]);
+	  else if (h1->data.type == red   && h2->data.type == yellow) set_led(LED_state[0]);
+
+
+	  if (h1->data.remaining_time > 0) h1->data.remaining_time--;
+	  if (h2->data.remaining_time > 0) h2->data.remaining_time--;
+
+	  HAL_Delay(1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
