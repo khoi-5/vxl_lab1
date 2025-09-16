@@ -222,6 +222,8 @@ int main(void)
 
 
   queue q1, q2;
+  initQueue(&q1);
+  initQueue(&q2);
 
   NODE a1 = { red, RED_X, RED_X };
   NODE b1 = { yellow, YELLOW_X, YELLOW_X };
