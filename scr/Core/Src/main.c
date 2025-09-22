@@ -317,6 +317,8 @@ int main(void)
   {
 	  queue_node *h1 = q1.front;
 	  queue_node *h2 = q2.front;
+	  //NODE *h1 = queue_peek_ptr(&q1);
+	  //NODE *h2 = queue_peek_ptr(&q2)
 
 
 	  if (h1->data.remaining_time <= 0) {
@@ -336,10 +338,10 @@ int main(void)
 	  }
 
 
-	  if (h1->data.type == green  && h2->data.type == red)    set_led(LED_state[0]);
-	  else if (h1->data.type == yellow && h2->data.type == red)   set_led(LED_state[1]);
-	  else if (h1->data.type == red   && h2->data.type == green)  set_led(LED_state[2]);
-	  else if (h1->data.type == red   && h2->data.type == yellow) set_led(LED_state[3]);
+	  if      (h1->data.type == green  	&& h2->data.type == red) 	 set_led(LED_state[0]);
+	  else if (h1->data.type == yellow  && h2->data.type == red)     set_led(LED_state[1]);
+	  else if (h1->data.type == red     && h2->data.type == green)   set_led(LED_state[2]);
+	  else if (h1->data.type == red     && h2->data.type == yellow)  set_led(LED_state[3]);
 
 
 
