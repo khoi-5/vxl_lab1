@@ -257,10 +257,10 @@ NODE peek(queue *q) {
 
 //================================
 #define RED_X 5
-#define YELLOW_X 2
-#define GREEN_X 3
+#define YELLOW_X 3
+#define GREEN_X 4
 
-#define RED_Y 5
+#define RED_Y 7
 #define YELLOW_Y 2
 #define GREEN_Y 3
 int main(void)
