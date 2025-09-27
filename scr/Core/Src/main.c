@@ -90,10 +90,19 @@ GPIO_PinState LED_state[4][12] = {
     {0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0}
 };
 
-void set_led (const GPIO_PinState *state){
-	for (int i =0; i< 12; i++){
-		HAL_GPIO_WritePin(LED_PORT[i], LED_Pin[i], state[i]);
-	}
+void set_led(const GPIO_PinState *state) {
+    HAL_GPIO_WritePin(LED_PORT[0], LED_Pin[0], state[0]);
+    HAL_GPIO_WritePin(LED_PORT[1], LED_Pin[1], state[1]);
+    HAL_GPIO_WritePin(LED_PORT[2], LED_Pin[2], state[2]);
+    HAL_GPIO_WritePin(LED_PORT[3], LED_Pin[3], state[3]);
+    HAL_GPIO_WritePin(LED_PORT[4], LED_Pin[4], state[4]);
+    HAL_GPIO_WritePin(LED_PORT[5], LED_Pin[5], state[5]);
+    HAL_GPIO_WritePin(LED_PORT[6], LED_Pin[6], state[6]);
+    HAL_GPIO_WritePin(LED_PORT[7], LED_Pin[7], state[7]);
+    HAL_GPIO_WritePin(LED_PORT[8], LED_Pin[8], state[8]);
+    HAL_GPIO_WritePin(LED_PORT[9], LED_Pin[9], state[9]);
+    HAL_GPIO_WritePin(LED_PORT[10], LED_Pin[10], state[10]);
+    HAL_GPIO_WritePin(LED_PORT[11], LED_Pin[11], state[11]);
 }
 
 //code led 7 doan
@@ -145,10 +154,14 @@ GPIO_PinState SEG_state[10][7] = {
     {0, 0, 0, 0, 0, 0, 0}, // 8
     {0, 0, 0, 0, 1, 0, 0}  // 9
 };
-void set_led_7_x (const GPIO_PinState *state){
-	for (int i =0; i< 7; i++){
-		HAL_GPIO_WritePin(SEG_PORT[i], SEG_Pin[i], state[i]);
-	}
+void set_led_7_x(const GPIO_PinState *state) {
+    HAL_GPIO_WritePin(SEG_PORT[0], SEG_Pin[0], state[0]);
+    HAL_GPIO_WritePin(SEG_PORT[1], SEG_Pin[1], state[1]);
+    HAL_GPIO_WritePin(SEG_PORT[2], SEG_Pin[2], state[2]);
+    HAL_GPIO_WritePin(SEG_PORT[3], SEG_Pin[3], state[3]);
+    HAL_GPIO_WritePin(SEG_PORT[4], SEG_Pin[4], state[4]);
+    HAL_GPIO_WritePin(SEG_PORT[5], SEG_Pin[5], state[5]);
+    HAL_GPIO_WritePin(SEG_PORT[6], SEG_Pin[6], state[6]);
 }
 void display7seg_x(int num) {
     if (num >= 0 && num <= 9) {
@@ -157,10 +170,14 @@ void display7seg_x(int num) {
 }
 
 
-void set_led_7_y (const GPIO_PinState *state){
-	for (int i =0; i< 7; i++){
-		HAL_GPIO_WritePin(SEG_PORT[i+7], SEG_Pin[i+7], state[i]);
-	}
+void set_led_7_y(const GPIO_PinState *state) {
+    HAL_GPIO_WritePin(SEG_PORT[7], SEG_Pin[7], state[0]);
+    HAL_GPIO_WritePin(SEG_PORT[8], SEG_Pin[8], state[1]);
+    HAL_GPIO_WritePin(SEG_PORT[9], SEG_Pin[9], state[2]);
+    HAL_GPIO_WritePin(SEG_PORT[10], SEG_Pin[10], state[3]);
+    HAL_GPIO_WritePin(SEG_PORT[11], SEG_Pin[11], state[4]);
+    HAL_GPIO_WritePin(SEG_PORT[12], SEG_Pin[12], state[5]);
+    HAL_GPIO_WritePin(SEG_PORT[13], SEG_Pin[13], state[6]);
 }
 void display7seg_y(int num) {
     if (num >= 0 && num <= 9) {
