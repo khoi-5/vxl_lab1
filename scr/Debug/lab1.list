@@ -39,11 +39,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  17 .debug_line   0000467b  00000000  00000000  00039d14  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00079a17  00000000  00000000  0003e38f  2**0
+ 18 .debug_str    00079a1b  00000000  00000000  0003e38f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000053  00000000  00000000  000b7da6  2**0
+ 19 .comment      00000053  00000000  00000000  000b7daa  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00000dc0  00000000  00000000  000b7dfc  2**2
+ 20 .debug_frame  00000dc0  00000000  00000000  000b7e00  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -148,7 +148,7 @@ void setNumberOnClock(int num){
  80001bc:	20000030 	.word	0x20000030
 
 080001c0 <main>:
-void setzeroOnClock(int num){
+void clearNumberOnClock(int num){
 	HAL_GPIO_WritePin(LED_PORT[num], LED_Pin[num], 0);
 }
 int main(void)

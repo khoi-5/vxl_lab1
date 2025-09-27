@@ -103,7 +103,7 @@ void turnAllClock (){
 void setNumberOnClock(int num){
 	HAL_GPIO_WritePin(LED_PORT[num], LED_Pin[num], 1);
 }
-void setzeroOnClock(int num){
+void clearNumberOnClock(int num){
 	HAL_GPIO_WritePin(LED_PORT[num], LED_Pin[num], 0);
 }
 int main(void)
