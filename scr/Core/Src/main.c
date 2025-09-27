@@ -317,8 +317,7 @@ int main(void)
   {
 	  queue_node *h1 = q1.front;
 	  queue_node *h2 = q2.front;
-	  //NODE *h1 = queue_peek_ptr(&q1);
-	  //NODE *h2 = queue_peek_ptr(&q2)
+
 
 
 	  if (h1->data.remaining_time <= 0) {
@@ -449,7 +448,8 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+//NODE *h1 = queue_peek_ptr(&q1);
+	  //NODE *h2 = queue_peek_ptr(&q2)
 /* USER CODE END 4 */
 
 /**
