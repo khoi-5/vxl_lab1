@@ -94,7 +94,7 @@ void clearAllClock (){
   for (int i=0; i< 12; i++){
 	  HAL_GPIO_WritePin(LED_PORT[i], LED_Pin[i], 0);
   }
- }
+}
 void turnAllClock (){
   for (int i=0; i< 12; i++){
 	  HAL_GPIO_WritePin(LED_PORT[i], LED_Pin[i], 1);
@@ -147,9 +147,7 @@ int main(void)
 	  setNumberOnClock(second/5);
 
 
-
-
-	  HAL_Delay(100);
+	  HAL_Delay(1000);
 	  second++;
 	  if (second == 60){
 		  second =0;
@@ -160,7 +158,7 @@ int main(void)
 		  hour++;
 	  }
 	  if (hour == 12){
-		  hour =0;
+		  hour = 0;
 
 	  }
 	  clearAllClock();

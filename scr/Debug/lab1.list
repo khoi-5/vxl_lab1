@@ -108,7 +108,7 @@ void clearAllClock (){
  8000178:	2b0b      	cmp	r3, #11
  800017a:	dded      	ble.n	8000158 <clearAllClock+0xc>
   }
- }
+}
  800017c:	bf00      	nop
  800017e:	bf00      	nop
  8000180:	3708      	adds	r7, #8
@@ -217,8 +217,6 @@ int main(void)
  8000208:	f7ff ffc2 	bl	8000190 <setNumberOnClock>
 
 
-
-
 	  HAL_Delay(100);
  800020c:	2064      	movs	r0, #100	; 0x64
  800020e:	f000 f97b 	bl	8000508 <HAL_Delay>
@@ -254,7 +252,7 @@ int main(void)
  8000238:	68fb      	ldr	r3, [r7, #12]
  800023a:	2b0c      	cmp	r3, #12
  800023c:	d101      	bne.n	8000242 <main+0x82>
-		  hour =0;
+		  hour = 0;
  800023e:	2300      	movs	r3, #0
  8000240:	60fb      	str	r3, [r7, #12]
 
