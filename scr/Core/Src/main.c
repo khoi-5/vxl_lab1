@@ -147,7 +147,7 @@ int main(void)
 	  setNumberOnClock(second/5);
 
 
-	  HAL_Delay(1000);
+
 	  second++;
 	  if (second == 60){
 		  second =0;
@@ -161,6 +161,7 @@ int main(void)
 		  hour = 0;
 
 	  }
+	  HAL_Delay(1000);
 	  clearAllClock();
 
     /* USER CODE END WHILE */
