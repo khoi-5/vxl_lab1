@@ -55,15 +55,6 @@ static void MX_GPIO_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
-/* USER CODE END 0 */
-
-/**
-  * @brief  The application entry point.
-  * @retval int
-  */
-
-
 GPIO_TypeDef *LED_PORT [12] = {
 		LED0_GPIO_Port,
 		LED1_GPIO_Port,
@@ -263,6 +254,15 @@ NODE peek(queue *q) {
 #define RED_Y 7
 #define YELLOW_Y 2
 #define GREEN_Y 3
+/* USER CODE END 0 */
+
+/**
+  * @brief  The application entry point.
+  * @retval int
+  */
+
+
+
 int main(void)
 {
   /* USER CODE BEGIN 1 */

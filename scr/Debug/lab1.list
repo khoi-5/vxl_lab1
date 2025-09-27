@@ -464,10 +464,10 @@ int dequeue(queue *q, NODE *out) {
 	...
 
 080003ac <main>:
+  */
 
-#define RED_Y 7
-#define YELLOW_Y 2
-#define GREEN_Y 3
+
+
 int main(void)
 {
  80003ac:	b580      	push	{r7, lr}
